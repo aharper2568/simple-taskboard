@@ -23,7 +23,7 @@ function generateTaskId() {
 // Function to create a task card
 function createTaskCard(task) {
   // create card elements
-  const cardEl = $('<div>').addClass('task-card').data('id', task.id);
+  const cardEl = $('<div>').addClass('task-card mb-3').data('id', task.id);
   const titleEl = $('<h1>').text(task.title);
   const dueDateEl = $('<h2>').text(task.dueDate);
   const descriptionEl = $('<p>').text(task.description);
