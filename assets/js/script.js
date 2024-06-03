@@ -39,6 +39,10 @@ function createTaskCard(task) {
     }
 
   // append card elements
+  // append card elements
+  cardEl.append(titleEl, dueDateEl, descriptionEl, deleteButtonEl);
+
+  return cardEl;
 }
 
 // TODO: create a function to render the task list and make cards draggable
