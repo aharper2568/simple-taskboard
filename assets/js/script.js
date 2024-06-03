@@ -87,14 +87,17 @@ function handleAddTask(event) {
   
   // add the new task to the taskList save and render
   localStorage.setItem('tasks', JSON.stringify(taskList));
-  renderTaskList()
+  renderTaskList();
 }
 
 // TODO: create a function to handle deleting a task
 function handleDeleteTask(event) {
   // get the task id from the button clicked
-
+const taskId = $(event.target).closest('.task-card').data('id');
   // remove the task from the taskList, save and render
+  taskList = taskList.filter(task => task.id !== taskId);
+  localStorage.setItem('tasks', JSON.stringify(taskList));
+  renderTaskList();
 }
 
 // TODO: create a function to handle dropping a task into a new status lane
