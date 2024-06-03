@@ -2,7 +2,7 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
-// Todo: create a function to generate a unique task id
+// TODO: create a function to generate a unique task id
 function generateTaskId() {
   // if nextId does not exist in localStorage, set it to 1
 
@@ -11,7 +11,7 @@ function generateTaskId() {
   // save nextId to localStorage
 }
 
-// Todo: create a function to create a task card
+// TODO: create a function to create a task card
 function createTaskCard(task) {
   // create card elements
 
@@ -20,7 +20,7 @@ function createTaskCard(task) {
   // append card elements
 }
 
-// Todo: create a function to render the task list and make cards draggable
+// TODO: create a function to render the task list and make cards draggable
 function renderTaskList() {
   // if taskList is null, set it to an empty array
 
@@ -31,21 +31,21 @@ function renderTaskList() {
   // make task cards draggable
 }
 
-// Todo: create a function to handle adding a new task
+// TODO: create a function to handle adding a new task
 function handleAddTask(event) {
   // create a new task object
 
   // add the new task to the taskList save and render
 }
 
-// Todo: create a function to handle deleting a task
+// TODO: create a function to handle deleting a task
 function handleDeleteTask(event) {
   // get the task id from the button clicked
 
   // remove the task from the taskList, save and render
 }
 
-// Todo: create a function to handle dropping a task into a new status lane
+// TODO: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
   // get the task id and new status from the event
 
@@ -54,7 +54,7 @@ function handleDrop(event, ui) {
   // save and render
 }
 
-// Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
+// TODO: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
   // render the task list
 
