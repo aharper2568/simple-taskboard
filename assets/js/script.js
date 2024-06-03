@@ -4,18 +4,39 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // TODO: create a function to generate a unique task id
 function generateTaskId() {
+  let nextId = JSON.parse(localStorage.getItem(nextId));
   // if nextId does not exist in localStorage, set it to 1
-
+if (nextId === null) {
+  nextId =1; } else { nextId += 1; 
+}
   // otherwise, increment it by 1
+  localStorage.setItem('nextId', JSON.stringify(nextId));
 
   // save nextId to localStorage
+  return nextId;
 }
 
 // TODO: create a function to create a task card
 function createTaskCard(task) {
   // create card elements
+  const cardEl = $('<div>').addClass('task-card');
+  const titleEl = $('<h3>').text(task.title);
+  const dueDateEl = $('<h2>').text(task.dueDate);
+  const descriptionEl = $('<p>').text(task.description);
+  const deleteButtonEl = $('<button>').addClass('delete-task btn btn-danger').text('Delete');
 
-  // set card background color based on due date
+
+    // set card background color based on due date
+    const now = dayjs(); // Get the current date
+    const dueDate = dayjs(task.dueDate); // Convert task due date to dayjs object
+  
+    if (now.isSame(dueDate, 'day')) {
+      cardEl.addClass('bg-warning text-white');
+    } else if (now.isAfter(dueDate, 'day')) {
+      cardEl.addClass('bg-danger text-white'); // Task is overdue
+    } else if (now.isBefore(dueDate, 'day')) {
+      cardEl.addClass('bg-info text-white'); // Task is not yet due
+    }
 
   // append card elements
 }
