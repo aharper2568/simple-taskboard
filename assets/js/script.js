@@ -4,11 +4,12 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // TODO: create a function to generate a unique task id
 function generateTaskId() {
-  let nextId = JSON.parse(localStorage.getItem(nextId));
   // if nextId does not exist in localStorage, set it to 1
-if (nextId === null) {
-  nextId =1; } else { nextId += 1; 
-}
+  if (nextId === null) {
+    nextId = 1;
+  } else {
+    nextId += 1;
+  }
   // otherwise, increment it by 1
   localStorage.setItem('nextId', JSON.stringify(nextId));
 
@@ -116,10 +117,18 @@ renderTaskList();
 // TODO: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
   // render the task list
+  renderTaskList();
 
   // add event listener
-
+$('#task-form').submit(handleAddTask);
   // make lanes droppable
-
+$('.lane .card-body').droppable({
+  accept: '.task-card',
+  drop: handleDrop
+});
   // make due date field a date picker
+
+  $('#datepicker').datepicker({
+    dateFormat: 'yy-mm-dd'
+  })
 });
