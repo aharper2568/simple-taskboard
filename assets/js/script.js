@@ -70,8 +70,24 @@ taskList.forEach(task => {
 // TODO: create a function to handle adding a new task
 function handleAddTask(event) {
   // create a new task object
+  event.preventDefault();
+  const title = $('#task-title').val();
+  const dueDate = $('#datepicker').val();
+  const description = $('#description').val();
+  const id = generateTaskId();
+  const newTask = {
+    id,
+    title,
+    dueDate,
+    description,
+    status: 'to-do'
+  };
 
+  taskList.push(newTask);
+  
   // add the new task to the taskList save and render
+  localStorage.setItem('tasks', JSON.stringify(taskList));
+  renderTaskList()
 }
 
 // TODO: create a function to handle deleting a task
