@@ -68,15 +68,7 @@ function renderTaskList() {
   }
   
   // make task cards draggable
-  $('.task-card').draggable({
-    revert: "invalid",
-    start: function(event, ui) {
-      $(this).css('z-index', 1000);
-    },
-    stop: function(event, ui) {
-      $(this).css('z-index', '');
-    }
-  });
+  $('.task-card').draggable();
 }
 
 // Function to handle adding a new task
