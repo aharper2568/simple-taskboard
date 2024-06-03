@@ -38,7 +38,7 @@ function createTaskCard(task) {
       cardEl.addClass('bg-info text-white'); // Task is not yet due
     }
 
-  // append card elements
+
   // append card elements
   cardEl.append(titleEl, dueDateEl, descriptionEl, deleteButtonEl);
 
@@ -48,12 +48,23 @@ function createTaskCard(task) {
 // TODO: create a function to render the task list and make cards draggable
 function renderTaskList() {
   // if taskList is null, set it to an empty array
-
+  let taskList = JSON.parse(localStorage.getItem("tasks")) || [];
   // empty existing task cards
-
+  $('#todo-cards').empty();
+  $('#in-progress-cards').empty();
+  $('#done-cards').empty();
   // loop through tasks and create task cards for each status
-
+taskList.forEach(task => {
+  const taskCard = createTaskCard(task);
+  $(`#${task.status}--cards`).append(taskCard);
+});
   // make task cards draggable
+
+  $('.task-card').draggable({
+    revert: 'invalid',
+    stack: '.task-card',
+    cursor: 'move'
+  })
 }
 
 // TODO: create a function to handle adding a new task
