@@ -4,6 +4,7 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // TODO: create a function to generate a unique task id
 function generateTaskId() {
+  let nextId = JSON.parse(localStorage.getItem(nextId));
   // if nextId does not exist in localStorage, set it to 1
   if (nextId === null) {
     nextId = 1;
@@ -55,10 +56,16 @@ function renderTaskList() {
   $('#in-progress-cards').empty();
   $('#done-cards').empty();
   // loop through tasks and create task cards for each status
-taskList.forEach(task => {
-  const taskCard = createTaskCard(task);
-  $(`#${task.status}--cards`).append(taskCard);
-});
+  for (let task of taskList) {
+    const taskCard = createTaskCard(task);
+    if (task.status === 'to-do') {
+      $('#todo-cards').append(taskCard);
+    } else if (task.status === 'in-progress') {
+      $('#in-progress-cards').append(taskCard);
+    } else if (task.status === 'done') {
+      $('#done-cards').append(taskCard);
+    }
+  }
   // make task cards draggable
 
   $('.task-card').draggable({
@@ -75,12 +82,11 @@ function handleAddTask(event) {
   const title = $('#task-title').val();
   const dueDate = $('#datepicker').val();
   const description = $('#description').val();
-  const id = generateTaskId();
   const newTask = {
-    id,
-    title,
-    dueDate,
-    description,
+    id: generateTaskId(),
+    title: title, 
+    dueDate: dueDate,
+    description: description,
     status: 'to-do'
   };
 
@@ -104,11 +110,22 @@ const taskId = $(event.target).closest('.task-card').data('id');
 // TODO: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
   // get the task id and new status from the event
-const taskId = ui.draggable.data('id');
+
+  const taskId = ui.draggable.data('id');
+  const updatedStatus = $(event.target).closest('.lane').attr('id').split('-')[0];
+
+
   // update the task status of the dragged card
-const newStatus = $(event.target).attr('id').replace('-cards','');
-const task = taskList.find(task => task.id === taskId);
-task.status = newStatus;
+
+  taskList = taskList.map(task => {
+    if (task.id == taskId) {
+      task.status = updatedStatus;
+    }
+    return task;
+  });
+
+
+
 // save and render
 localStorage.setItem('tasks', JSON.stringify(taskList));
 renderTaskList();
@@ -119,16 +136,20 @@ $(document).ready(function () {
   // render the task list
   renderTaskList();
 
-  // add event listener
-$('#task-form').submit(handleAddTask);
-  // make lanes droppable
-$('.lane .card-body').droppable({
-  accept: '.task-card',
-  drop: handleDrop
-});
-  // make due date field a date picker
+  // add event listener for adding a new task
+  $('#task-form').on('submit', handleAddTask);
 
+  // add event listener for deleting a task
+  $(document).on('click', '.delete-task', handleDeleteTask);
+
+  // make lanes droppable
+  $('.lane').droppable({
+    accept: '.task-card',
+    drop: handleDrop
+  });
+
+  // make due date field a date picker
   $('#datepicker').datepicker({
     dateFormat: 'yy-mm-dd'
-  })
+  });
 });
