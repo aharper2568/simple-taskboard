@@ -103,10 +103,14 @@ const taskId = $(event.target).closest('.task-card').data('id');
 // TODO: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
   // get the task id and new status from the event
-
+const taskId = ui.draggable.data('id');
   // update the task status of the dragged card
-
-  // save and render
+const newStatus = $(event.target).attr('id').replace('-cards','');
+const task = taskList.find(task => task.id === taskId);
+task.status = newStatus;
+// save and render
+localStorage.setItem('tasks', JSON.stringify(taskList));
+renderTaskList();
 }
 
 // TODO: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
