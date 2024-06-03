@@ -68,7 +68,9 @@ function renderTaskList() {
   }
   
   // make task cards draggable
-  $('.task-card').draggable();
+  $('.task-card').draggable({
+    zIndex:100
+  });
 }
 
 // Function to handle adding a new task
@@ -114,9 +116,10 @@ function handleDeleteTask(event) {
 
 // Function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
+  console.log('dropped')
   // get the task id and new status from the event
   const taskId = ui.draggable.data('id');
-  const updatedStatus = $(event.target).closest('.lane').attr('id').split('-')[0];
+  const updatedStatus = $(event.target).closest('.lane').attr('id');
 
   taskList = taskList.map(task => {
     if (task.id == taskId) {
@@ -124,7 +127,7 @@ function handleDrop(event, ui) {
     }
     return task;
   });
-
+console.log(taskList)
   // save and render
   localStorage.setItem('tasks', JSON.stringify(taskList));
   renderTaskList();
