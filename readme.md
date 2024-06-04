@@ -9,3 +9,12 @@ Clicking the 'Add Task' button will bring up a modal with three forms to fill ou
 # URLs
 [Github Repo](https://github.com/aharper2568/simple-taskboard) \
 [Live URL](https://aharper2568.github.io/simple-taskboard/)
+
+# Screenshots
+![page loaded](./assets/images/screen1.png)
+![pressing add task](./assets/images/screen2.png)
+![task added](/assets/images/Task-Board.png)
+
+# Author
+
+Coded in VScode by **Anthony Harper**
