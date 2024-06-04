@@ -15,6 +15,10 @@ Clicking the 'Add Task' button will bring up a modal with three forms to fill ou
 ![pressing add task](./assets/images/screen2.png)
 ![task added](/assets/images/Task-Board.png)
 
-# Author
+# Author and Contributors
 
 Coded in VScode by **Anthony Harper**
+
+[Map method used to iterate through tasks and update their status](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+
+[.closest method used to grab the nearby element class and id of lane and to-do sections](https://api.jquery.com/closest/)
