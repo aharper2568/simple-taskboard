@@ -32,7 +32,12 @@ function createTaskCard(task) {
   // set card background color based on due date
   const now = dayjs(); // Get the current date
   const dueDate = dayjs(task.dueDate); // Convert task due date to dayjs object
-
+  for (let task of taskList) {
+    if (task.status === 'done') {
+      cardEl.addClass('success')
+    }
+  }
+  
   if (now.isSame(dueDate, 'day')) {
     cardEl.addClass('bg-warning text-white');
   } else if (now.isAfter(dueDate, 'day')) {
@@ -40,7 +45,7 @@ function createTaskCard(task) {
   } else if (now.isBefore(dueDate, 'day')) {
     cardEl.addClass('bg-info text-white'); // Task is not yet due
   }
-
+  
   // append card elements
   cardEl.append(titleEl, dueDateEl, descriptionEl, deleteButtonEl);
 
@@ -66,6 +71,7 @@ function renderTaskList() {
       $('#done-cards').append(taskCard);
     }
   }
+
   
   // make task cards draggable
   $('.task-card').draggable({
